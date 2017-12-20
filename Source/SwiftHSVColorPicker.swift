@@ -16,8 +16,8 @@ open class SwiftHSVColorPicker: UIView, ColorWheelDelegate, BrightnessViewDelega
     var hue: CGFloat = 1.0
     var saturation: CGFloat = 1.0
     var brightness: CGFloat = 1.0
-    var label: UILabel!
-    var iconBrightness: UIImageView!
+    open var label: UILabel!
+    open var iconBrightness: UIImageView!
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -74,11 +74,10 @@ open class SwiftHSVColorPicker: UIView, ColorWheelDelegate, BrightnessViewDelega
         // Add brightnessView as a subview of this view
         self.addSubview(brightnessView)
         
-        iconBrightness = UIImageView.init(image: UIImage.init(named: "brightness-medium"))
-        iconBrightness.frame = CGRect(x: brightnessView.frame.origin.x - 32.0, y: brightnessView.frame.origin.y - 2.0, width: 24.0, height: 24.0)
+        iconBrightness = UIImageView.init(frame: CGRect(x: brightnessView.frame.origin.x - 32.0, y: brightnessView.frame.origin.y - 2.0, width: 24.0, height: 24.0))
         self.addSubview(iconBrightness)
         
-        label = UILabel.init(frame: CGRect(x: iconBrightness.frame.origin.x, y: iconBrightness.frame.origin.y - 24.0, width: 100.0, height: 20.0))
+        label = UILabel.init(frame: CGRect(x: iconBrightness.frame.origin.x, y: iconBrightness.frame.origin.y - 24.0, width: 200.0, height: 20.0))
         label.text = "BRIGHTNESS"
         self.addSubview(label)
     }

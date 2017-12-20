@@ -12,7 +12,6 @@ protocol BrightnessViewDelegate: class {
 }
 
 class BrightnessView: UIView {
-  
     weak var delegate: BrightnessViewDelegate?
   
     var colorLayer: CAGradientLayer!
@@ -46,7 +45,8 @@ class BrightnessView: UIView {
         colorLayer.locations = [0.0, 1.0]
         colorLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
         colorLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-        colorLayer.frame = CGRect(x: 0, y: 2, width: self.frame.size.width, height: 24)
+        colorLayer.frame = CGRect(x: 0, y: 2, width: self.frame.size.width, height: 16.0)
+        colorLayer.cornerRadius = 2.0
         // Insert the colorLayer into this views layer as a sublayer
         self.layer.insertSublayer(colorLayer, below: layer)
         
@@ -99,7 +99,7 @@ class BrightnessView: UIView {
     func drawIndicator() {
         // Draw the indicator
         if (point != nil) {
-            indicator.path = UIBezierPath(roundedRect: CGRect(x: point.x-3, y: 0, width: 6, height: 28), cornerRadius: 3).cgPath
+            indicator.path = UIBezierPath(roundedRect: CGRect(x: point.x-3, y: 0, width: 6, height: 20.0), cornerRadius: 3).cgPath
         }
     }
     

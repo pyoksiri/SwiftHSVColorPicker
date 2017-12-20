@@ -9,14 +9,14 @@ import UIKit
 
 class SelectedColorView: UIView {
     var color: UIColor!
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     init(frame: CGRect, color: UIColor) {
         super.init(frame: frame)
-        
+        self.layer.cornerRadius = frame.size.height/2
+        self.layer.masksToBounds = true
         setViewColor(color)
     }
     

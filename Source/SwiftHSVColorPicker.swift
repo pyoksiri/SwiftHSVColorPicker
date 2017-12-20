@@ -16,6 +16,8 @@ open class SwiftHSVColorPicker: UIView, ColorWheelDelegate, BrightnessViewDelega
     var hue: CGFloat = 1.0
     var saturation: CGFloat = 1.0
     var brightness: CGFloat = 1.0
+    var label: UILabel!
+    var iconBrightness: UIImageView!
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -46,8 +48,8 @@ open class SwiftHSVColorPicker: UIView, ColorWheelDelegate, BrightnessViewDelega
             view.removeFromSuperview()
         }
         
-        let selectedColorViewHeight: CGFloat = 44.0
-        let brightnessViewHeight: CGFloat = 26.0
+        let selectedColorViewHeight: CGFloat = 30.0
+        let brightnessViewHeight: CGFloat = 24.0
         
         // let color wheel get the maximum size that is not overflow from the frame for both width and height
         let colorWheelSize = min(self.bounds.width, self.bounds.height - selectedColorViewHeight - brightnessViewHeight)
@@ -56,7 +58,7 @@ open class SwiftHSVColorPicker: UIView, ColorWheelDelegate, BrightnessViewDelega
         let centeredX = (self.bounds.width - colorWheelSize) / 2.0
         
         // Init SelectedColorView subview
-        selectedColorView = SelectedColorView(frame: CGRect(x: centeredX, y:0, width: colorWheelSize, height: selectedColorViewHeight), color: self.color)
+        selectedColorView = SelectedColorView(frame: CGRect(x: centeredX + 32.0, y:0, width: colorWheelSize - 64.0, height: selectedColorViewHeight), color: self.color)
         // Add selectedColorView as a subview of this view
         self.addSubview(selectedColorView)
         
@@ -67,10 +69,20 @@ open class SwiftHSVColorPicker: UIView, ColorWheelDelegate, BrightnessViewDelega
         self.addSubview(colorWheel)
         
         // Init new BrightnessView subview
-        brightnessView = BrightnessView(frame: CGRect(x: centeredX, y: colorWheel.frame.maxY, width: colorWheelSize, height: brightnessViewHeight), color: self.color)
+        brightnessView = BrightnessView(frame: CGRect(x: centeredX + 64.0, y: colorWheel.frame.maxY + 20.0, width: colorWheelSize - 96.0, height: brightnessViewHeight), color: self.color)
         brightnessView.delegate = self
         // Add brightnessView as a subview of this view
         self.addSubview(brightnessView)
+        
+        iconBrightness = UIImageView.init(image: UIImage.init(named: "brightness-medium"))
+        iconBrightness.frame = CGRect(x: brightnessView.frame.origin.x - 32.0, y: brightnessView.frame.origin.y - 2.0, width: 24.0, height: 24.0)
+        self.addSubview(iconBrightness)
+        
+        label = UILabel.init(frame: CGRect(x: iconBrightness.frame.origin.x, y: iconBrightness.frame.origin.y - 24.0, width: 100.0, height: 20.0))
+        label.text = "BRIGHTNESS"
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightLight)
+        self.addSubview(label)
     }
     
     func hueAndSaturationSelected(_ hue: CGFloat, saturation: CGFloat) {

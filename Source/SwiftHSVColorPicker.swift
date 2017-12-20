@@ -80,8 +80,6 @@ open class SwiftHSVColorPicker: UIView, ColorWheelDelegate, BrightnessViewDelega
         
         label = UILabel.init(frame: CGRect(x: iconBrightness.frame.origin.x, y: iconBrightness.frame.origin.y - 24.0, width: 100.0, height: 20.0))
         label.text = "BRIGHTNESS"
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightLight)
         self.addSubview(label)
     }
     

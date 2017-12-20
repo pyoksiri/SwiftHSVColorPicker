@@ -58,7 +58,7 @@ open class SwiftHSVColorPicker: UIView, ColorWheelDelegate, BrightnessViewDelega
         let centeredX = (self.bounds.width - colorWheelSize) / 2.0
         
         // Init SelectedColorView subview
-        selectedColorView = SelectedColorView(frame: CGRect(x: centeredX + 32.0, y:0, width: colorWheelSize - 64.0, height: selectedColorViewHeight), color: self.color)
+        selectedColorView = SelectedColorView(frame: CGRect(x: (self.bounds.width/2) - 100.0, y:0, width: 200.0, height: selectedColorViewHeight), color: self.color)
         // Add selectedColorView as a subview of this view
         self.addSubview(selectedColorView)
         
@@ -68,14 +68,14 @@ open class SwiftHSVColorPicker: UIView, ColorWheelDelegate, BrightnessViewDelega
         // Add colorWheel as a subview of this view
         self.addSubview(colorWheel)
         
+        iconBrightness = UIImageView.init(frame: CGRect(x: 20.0, y: colorWheel.frame.maxY + 18, width: 24.0, height: 24.0))
+        self.addSubview(iconBrightness)
+        
         // Init new BrightnessView subview
-        brightnessView = BrightnessView(frame: CGRect(x: centeredX + 64.0, y: colorWheel.frame.maxY + 20, width: colorWheelSize - 96.0, height: brightnessViewHeight), color: self.color)
+        brightnessView = BrightnessView(frame: CGRect(x: iconBrightness.frame.size.width + iconBrightness.frame.origin.x + 10.0, y: colorWheel.frame.maxY + 20, width: self.bounds.width - (iconBrightness.frame.size.width + iconBrightness.frame.origin.x + 10.0) - 20.0, height: brightnessViewHeight), color: self.color)
         brightnessView.delegate = self
         // Add brightnessView as a subview of this view
         self.addSubview(brightnessView)
-        
-        iconBrightness = UIImageView.init(frame: CGRect(x: brightnessView.frame.origin.x - 32.0, y: brightnessView.frame.origin.y - 2.0, width: 24.0, height: 24.0))
-        self.addSubview(iconBrightness)
         
         label = UILabel.init(frame: CGRect(x: iconBrightness.frame.origin.x, y: iconBrightness.frame.origin.y - 24.0, width: 200.0, height: 20.0))
         label.text = "BRIGHTNESS"
